@@ -1,8 +1,46 @@
-<h1>Categorias</h1>
+<h2>Categorias</h2>
+<hr />
 
-
-
-<div *ngFor="let categoria of categorias">
-  <p>{{categoria.descricao}}</p>
-  <hr>
+<div class="row g-3">
+  <div class="col-auto">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Buscar"
+      [(ngModel)]="filtroLista"
+    />
+  </div>
 </div>
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Icone</th>
+      <th>Descricao</th>
+      <th>Ativo</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="categorias && categorias.length">
+    <tr *ngFor="let categoria of categoriasFiltradas">
+      <td>{{ categoria.id }}</td>
+      <td>{{ categoria.iconURL }}</td>
+      <td>{{ categoria.descricao }}</td>
+      <td>{{ categoria.ativo }}</td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm mr-2">
+          Editar
+        </button>
+        <button type="button" class="btn btn-danger btn-sm">
+          Excluir
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot *ngIf="!categorias.length">
+    <tr>
+      <td colspan="8" class="text-center">
+        <h4>Nenhuma Categoria encontrada</h4>
+      </td>
+    </tr>
+  </tfoot>
+</table>
