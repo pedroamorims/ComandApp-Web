@@ -4,17 +4,31 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CategoriasComponent } from './categorias/categorias.component';
+
+import { CategoriasComponent } from './componentes/categorias/categorias.component';
+import { ProdutosComponent } from './componentes/produtos/produtos.component';
+
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './shared/nav/nav.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { FormsModule } from '@angular/forms';
+import { CategoriaService } from './services/categoria.service';
+
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { TitulosComponent } from './shared/titulos/titulos.component';
+import { ProdutoService } from './services/produto.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     CategoriasComponent,
+    ProdutosComponent,
+    TitulosComponent,
       NavComponent
    ],
   imports: [
@@ -24,9 +38,17 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
     TooltipModule.forRoot(),
+    ModalModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 50000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      progressBar: true
+    }),
+    NgxSpinnerModule,
     FormsModule
   ],
-  providers: [],
+  providers: [CategoriaService, ProdutoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
