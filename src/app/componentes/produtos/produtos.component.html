@@ -16,7 +16,6 @@
   <table class="table table-light table-bordered">
     <thead class="table-dark">
       <tr>
-        <th>#</th>
         <th>Nome</th>
         <th>Descricao</th>
         <th>Ativo</th>
@@ -26,7 +25,6 @@
     </thead>
     <tbody *ngIf="produtos && produtos.length">
       <tr *ngFor="let produto of produtosFiltradas">
-        <td>{{ produto.id }}</td>
         <td>{{ produto.nome }}</td>
         <td>{{ produto.descricao }}</td>
         <td *ngIf="produto.ativo">

@@ -1,0 +1,94 @@
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+
+<div class="card rounded shadow-sm p-3">
+  <div class="d-flex">
+    <div class="input-group mb-3">
+      <div class="input-group-text">Filtro:</div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Filtras Categorias"
+        [(ngModel)]="filtroLista"
+      />
+    </div>
+
+    <div>
+      <a class="d-flex btn btn-outline-primary" routerLink="/categorias/detalhe">
+        <i class="fa fa-plus-circle my-1"></i>
+        <b class="ms-1 d-none d-sm-block">Novo</b>
+      </a>
+    </div>
+  </div>
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Descricao</th>
+        <th>Ativo</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngIf="categorias && categorias.length">
+      <tr *ngFor="let categoria of categoriasFiltradas" (click)="detalhecategoria(categoria.id)" style="cursor: pointer;" >
+        <td>{{ categoria.descricao }}</td>
+        <td *ngIf="categoria.ativo">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="checkbox"
+            checked
+            disabled
+          />
+        </td>
+        <td *ngIf="!categoria.ativo">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="checkbox"
+            disabled
+          />
+        </td>
+
+        <!-- {{categoria.ativo ? 'flexCheckDisabled' : 'flexCheckChecked'}} -->
+        <td>
+          <button
+          type="button"
+          class="btn btn-secondary btn-sm  me-2"
+          (click)="openModal(template)"
+        >
+          <i class="fa fa-eye"></i>
+          Produtos
+        </button>
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            (click)="openModal(template)"
+          >
+            <i class="fa fa-trash"></i>
+            Excluir
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="!categorias.length">
+      <tr>
+        <td colspan="8" class="text-center">
+          <h4>Nenhuma Categoria encontrada</h4>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Tem certeza que quer deletar essa categoria?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()">
+      Sim
+    </button>
+    <button type="button" class="btn btn-primary" (click)="decline()">
+      Não
+    </button>
+  </div>
+</ng-template>

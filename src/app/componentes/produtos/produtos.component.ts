@@ -81,6 +81,8 @@ export class ProdutosComponent implements OnInit {
 
     this.produtoService.getProduto().subscribe(observer);
   }
+
+  
 }
 
 

@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './shared/nav/nav.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoriaService } from './services/categoria.service';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -21,6 +21,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { TitulosComponent } from './shared/titulos/titulos.component';
 import { ProdutoService } from './services/produto.service';
+import { CategoriaDetalheComponent } from './componentes/categorias/categoria-detalhe/categoria-detalhe.component';
+import { CategoriaListaComponent } from './componentes/categorias/categoria-lista/categoria-lista.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { ProdutoService } from './services/produto.service';
     CategoriasComponent,
     ProdutosComponent,
     TitulosComponent,
-      NavComponent
+      NavComponent,
+      CategoriaDetalheComponent,
+      CategoriaListaComponent
    ],
   imports: [
     BrowserModule,
@@ -46,7 +50,8 @@ import { ProdutoService } from './services/produto.service';
       progressBar: true
     }),
     NgxSpinnerModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [CategoriaService, ProdutoService],
   bootstrap: [AppComponent]

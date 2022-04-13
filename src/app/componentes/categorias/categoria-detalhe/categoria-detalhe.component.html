@@ -1,0 +1,58 @@
+<div class="card rounded shadow-sm p-3">
+  <form [formGroup]="form" >
+    <!-- <p>Form value: {{form.value | json}}</p>
+    <p>Form valid: {{form.status | json}}</p>-->
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label">Descrição</label>
+      <div class="col-md-4">
+        <input
+          formControlName="descricao"
+          name="descricao"
+          type="text"
+          placeholder="Descrição"
+          class="form-control input-md"
+          [ngClass]="cssvalidator(f.descricao)"
+        />
+        <div *ngIf="f.descricao.errors?.required" class="invalid-feedback">
+          Descrição é Obrigatória
+        </div>
+        <div *ngIf="f.descricao.errors?.minlength" class="invalid-feedback">
+          Descrição deve ter no mínimo 3 caracteres
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label">URL do Icone</label>
+      <div class="col-md-4 mb-2">
+        <input
+          formControlName="iconURL"
+          name="iconURL"
+          type="text"
+          placeholder="iconURL"
+          class="form-control input-md"
+          [ngClass]="cssvalidator(f.iconURL)"
+        />
+        <div *ngIf="f.iconURL.errors?.required" class="invalid-feedback">
+          URL do Icone é Obrigatória
+        </div>
+      </div>
+    </div>
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+      <div class="col-md-8">
+        <button class="btn btn-success me-2" [disabled]="!form.valid" (click)="salvarAlteracao()">
+          Salvar
+        </button>
+        <button class="btn btn-danger">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
