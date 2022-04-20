@@ -1,0 +1,87 @@
+<app-titulos [titulo]="(categoria.descricao)"></app-titulos>
+
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+
+<div class="card rounded shadow-sm p-3">
+  <div class="d-flex">
+    <div class="input-group mb-3">
+      <div class="input-group-text">Filtro:</div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Filtrar {{categoria.descricao}}"
+        [(ngModel)]="filtroLista"
+      />
+    </div>
+
+    <div>
+      <a class="d-flex btn btn-outline-primary" routerLink="/produtos/detalhe">
+        <i class="fa fa-plus-circle my-1"></i>
+        <b class="ms-1 d-none d-sm-block">Criar</b>
+      </a>
+    </div>
+  </div>
+<table class="table table-light table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th>Nome</th>
+      <th>Descricao</th>
+      <th>Ativo</th>
+      <th>Categoria</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody *ngIf="produtos && produtos.length">
+    <tr *ngFor="let produto of produtosFiltradas">
+      <td>{{ produto.nome }}</td>
+      <td>{{ produto.descricao }}</td>
+      <td *ngIf="produto.ativo">
+        <input class="form-check-input" type="checkbox" value = "" id = "checkbox" checked disabled>
+      </td>
+      <td *ngIf="!produto.ativo">
+        <input class="form-check-input" type="checkbox" value = "" id = "checkbox" disabled>
+      </td>
+      <td>{{ produto.categoria.descricao }}</td>
+
+     <!-- {{produto.ativo ? 'flexCheckDisabled' : 'flexCheckChecked'}} -->
+      <td>
+        <button
+        type="button"
+        class="btn btn-secondary btn-sm  me-2"
+        (click)="openModal(template)"
+      >
+        <i class="fa fa-eye"></i>
+        Tamanhos e Preços
+      </button>
+      <button
+      type="button"
+      class="btn btn-primary btn-sm me-2"
+      (click)="detalheproduto(produto.id)"
+    >
+      <i class="fa fa-trash"></i>
+      Editar
+    </button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="openModal(template)">
+          <i class="fa fa-trash"></i>
+          Excluir
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot *ngIf="!produtos.length">
+    <tr>
+      <td colspan="8" class="text-center">
+        <h4>{{categoria.descricao}} não existem no cadastro</h4>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Tem certeza que quer deletar esse produto?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+  </div>
+</ng-template>
+

@@ -9,5 +9,6 @@ export interface Produto {
   dataCriacao: Date;
   dataAlteracao: Date;
   ativo : boolean;
+  categoriaId: number;
 
 }

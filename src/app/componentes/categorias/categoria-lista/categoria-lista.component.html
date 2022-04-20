@@ -7,7 +7,7 @@
       <input
         type="text"
         class="form-control"
-        placeholder="Filtras Categorias"
+        placeholder="Filtrar Categorias"
         [(ngModel)]="filtroLista"
       />
     </div>
@@ -28,7 +28,7 @@
       </tr>
     </thead>
     <tbody *ngIf="categorias && categorias.length">
-      <tr *ngFor="let categoria of categoriasFiltradas" (click)="detalhecategoria(categoria.id)" style="cursor: pointer;" >
+      <tr *ngFor="let categoria of categoriasFiltradas" style="cursor: pointer;" >
         <td>{{ categoria.descricao }}</td>
         <td *ngIf="categoria.ativo">
           <input
@@ -55,11 +55,20 @@
           <button
           type="button"
           class="btn btn-secondary btn-sm  me-2"
-          (click)="openModal(template)"
+          (click)="buscarProdutosporCategoria(categoria.id)"
         >
           <i class="fa fa-eye"></i>
           Produtos
         </button>
+
+        <button
+        type="button"
+        class="btn btn-primary btn-sm me-2"
+        (click)="detalhecategoria(categoria.id)"
+      >
+        <i class="fa fa-trash"></i>
+        Editar
+      </button>
           <button
             type="button"
             class="btn btn-danger btn-sm"

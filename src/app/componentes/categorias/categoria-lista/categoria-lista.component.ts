@@ -54,7 +54,7 @@ export class CategoriaListaComponent implements OnInit {
   }
 
   private getCategorias(): void {
-    
+
     const observer = {
       next: (_categorias: Categoria[]) => {
         this.categorias = _categorias;
@@ -94,6 +94,11 @@ export class CategoriaListaComponent implements OnInit {
 
   detalhecategoria(id : number){
     this.router.navigate([`categorias/detalhe/${id}`]);
+  }
+
+  buscarProdutosporCategoria(id : number){
+    this.router.navigate([`produtos/lista/`], {queryParams: {idCategoria: id}});
+
   }
 
 }

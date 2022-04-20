@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { CategoriaDetalheComponent } from './componentes/categorias/categoria-detalhe/categoria-detalhe.component';
 import { CategoriaListaComponent } from './componentes/categorias/categoria-lista/categoria-lista.component';
 import { CategoriasComponent } from './componentes/categorias/categorias.component';
+import { ProdutoDetalheComponent } from './componentes/produtos/produto-detalhe/produto-detalhe.component';
+import { ProdutoListaComponent } from './componentes/produtos/produto-lista/produto-lista.component';
 import { ProdutosComponent } from './componentes/produtos/produtos.component';
 
 const routes: Routes = [
-  {path: 'categorias', redirectTo: 'categorias/lista'},
+  { path: 'categorias', redirectTo: 'categorias/lista' },
   {
     path: 'categorias',
     component: CategoriasComponent,
@@ -16,9 +18,20 @@ const routes: Routes = [
       { path: 'detalhe', component: CategoriaDetalheComponent },
     ],
   },
-  { path: 'produtos', component: ProdutosComponent },
-  { path: '', redirectTo: 'categorias', pathMatch: 'full' },
-  { path: '**', redirectTo: 'categorias', pathMatch: 'full' },
+
+  { path: 'produtos', redirectTo: 'produtos/lista' },
+  {
+    path: 'produtos',
+    component: ProdutosComponent,
+    children: [
+      { path: 'detalhe/:id', component: ProdutoDetalheComponent },
+      { path: 'lista', component: ProdutoListaComponent },
+      { path: 'lista?idCategoria=:id', component: ProdutoListaComponent },
+      { path: 'detalhe', component: ProdutoDetalheComponent },
+    ],
+  },
+  { path: '', redirectTo: 'categorias/lista', pathMatch: 'full' },
+  { path: '**', redirectTo: 'categorias/lista', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -23,6 +23,8 @@ import { TitulosComponent } from './shared/titulos/titulos.component';
 import { ProdutoService } from './services/produto.service';
 import { CategoriaDetalheComponent } from './componentes/categorias/categoria-detalhe/categoria-detalhe.component';
 import { CategoriaListaComponent } from './componentes/categorias/categoria-lista/categoria-lista.component';
+import { ProdutoDetalheComponent } from './componentes/produtos/produto-detalhe/produto-detalhe.component';
+import { ProdutoListaComponent } from './componentes/produtos/produto-lista/produto-lista.component';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { CategoriaListaComponent } from './componentes/categorias/categoria-list
     TitulosComponent,
       NavComponent,
       CategoriaDetalheComponent,
-      CategoriaListaComponent
+      CategoriaListaComponent,
+      ProdutoDetalheComponent,
+      ProdutoListaComponent
    ],
   imports: [
     BrowserModule,

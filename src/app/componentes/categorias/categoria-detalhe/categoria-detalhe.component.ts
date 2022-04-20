@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Categoria } from 'src/app/models/Categoria';
@@ -30,7 +30,8 @@ export class CategoriaDetalheComponent implements OnInit {
     private router: ActivatedRoute,
     private categoriaService: CategoriaService,
     private spinner: NgxSpinnerService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private routerlink: Router
   ) {}
 
   ngOnInit(): void {
@@ -70,7 +71,7 @@ export class CategoriaDetalheComponent implements OnInit {
     this.spinner.show();
 
     if (this.form.valid) {
-      this.categoria = {...this.form.value}
+      this.categoria = { ...this.form.value };
       this.categoria.ativo = true;
 
       this.categoriaService.postCategoria(this.categoria).subscribe(
@@ -80,7 +81,11 @@ export class CategoriaDetalheComponent implements OnInit {
           this.spinner.hide();
           this.toastr.error('Erro ao salvar categoria', 'Erro');
         },
-        () => this.spinner.hide()
+        () => {
+          this.spinner.hide();
+          this.routerlink.navigate([`categorias/lista`]);
+
+        }
       );
     }
   }

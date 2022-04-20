@@ -1,0 +1,77 @@
+<div class="card rounded shadow-sm p-3">
+  <form [formGroup]="form">
+    <!-- <p>Form value: {{form.value | json}}</p>
+    <p>Form valid: {{form.status | json}}</p>-->
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label">Nome</label>
+      <div class="col-md-4">
+        <input
+          formControlName="nome"
+          name="nome"
+          type="text"
+          placeholder="Nome"
+          class="form-control input-md"
+          [ngClass]="cssvalidator(f.nome)"
+        />
+        <div *ngIf="f.nome.errors?.required" class="invalid-feedback">
+          Nome é Obrigatório
+        </div>
+        <div *ngIf="f.nome.errors?.minlength" class="invalid-feedback">
+          Nome deve ter no mínimo 3 caracteres
+        </div>
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label">Descrição</label>
+      <div class="col-md-4">
+        <input
+          formControlName="descricao"
+          name="descricao"
+          type="text"
+          placeholder="Descrição"
+          class="form-control input-md"
+          [ngClass]="cssvalidator(f.descricao)"
+        />
+        <div *ngIf="f.descricao.errors?.required" class="invalid-feedback">
+          Descrição é Obrigatória
+        </div>
+        <div *ngIf="f.descricao.errors?.minlength" class="invalid-feedback">
+          Descrição deve ter no mínimo 3 caracteres
+        </div>
+      </div>
+    </div>
+
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="selectbasic"
+        >Categoria</label
+      >
+      <div class="col-md-4 mb-3">
+        <select formControlName="categoria" class="form-control">
+          <option [ngValue]="null" disabled>Selecione uma Categoria</option>
+          <option *ngFor="let categoria of categorias" [ngValue]="categoria">
+            {{categoria.descricao}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+      <div class="col-md-8">
+        <button
+          class="btn btn-success me-2"
+          [disabled]="!form.valid"
+          (click)="salvarAlteracao()"
+        >
+          Salvar
+        </button>
+        <button class="btn btn-danger">Cancelar</button>
+      </div>
+    </div>
+  </form>
+</div>
