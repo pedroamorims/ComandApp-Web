@@ -82,8 +82,6 @@ export class ProdutoDetalheComponent implements OnInit {
       this.produto.ativo = true;
       this.produto.categoriaId = this.produto.categoria.id;
 
-      console.log(this.produto);
-
       this.produtoService.postProduto(this.produto).subscribe(
         () => this.toastr.success('produto Salvo com Sucesso!', 'Sucesso!'),
         (error: any) => {

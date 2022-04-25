@@ -1,0 +1,176 @@
+<app-titulos [titulo]="produto?.nome"></app-titulos>
+
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+
+<div class="card rounded shadow-sm p-3">
+  <div class="d-flex">
+    <div class="input-group mb-3">
+      <div class="input-group-text">Filtro:</div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Filtrar tamanhos de {{ produto?.nome }}"
+        [(ngModel)]="filtroLista"
+      />
+    </div>
+  </div>
+  <table class="table table-light table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>Tamanho</th>
+        <th>Preço (R$)</th>
+        <th>Ativo</th>
+        <th>
+          <button
+            type="button"
+            class="btnse btn-success me-2"
+            (click)="adicionar()"
+            [disabled]="modoinsercao"
+          >
+            <i class="fa fa-plus-circle my-1"></i>
+            Criar
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody *ngIf="(tamanhos && tamanhos.length) || modoinsercao">
+      <tr *ngFor="let tamanho of tamanhosFiltradas; let i = index" [formGroup]="form">
+     <td>{{ tamanho.descricao }}</td>
+      <!--     <td>
+          <input
+            name="descricao"
+            type="text"
+            placeholder="descricao"
+            value="{{tamanho.descricao}}"
+            class="form-control"
+            [ngClass]="cssvalidator(f.descricao)"
+          />
+          <div *ngIf="f.descricao.errors?.required" class="invalid-feedback">
+            Descrição é Obrigatória
+          </div>
+          <div *ngIf="f.descricao.errors?.maxlength" class="invalid-feedback">
+            Descrição deve ter no máximo 5 caracteres
+          </div>
+        </td>-->
+        <td>{{ tamanho.preco.toPrecision(3) }}</td>
+        <td *ngIf="tamanho.ativo">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="checkbox"
+            checked
+            disabled
+          />
+        </td>
+        <td *ngIf="!tamanho.ativo">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="checkbox"
+            disabled
+          />
+        </td>
+        <!-- {{produto.ativo ? 'flexCheckDisabled' : 'flexCheckChecked'}} -->
+        <td>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm me-2"
+            (click)="editar(i)"
+          >
+            <i class="fa fa-pencil"></i>
+            Editar
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            (click)="openModal(template)"
+          >
+            <i class="fa fa-trash"></i>
+            Excluir
+          </button>
+        </td>
+      </tr>
+      <tr [formGroup]="form" *ngIf="modoinsercao">
+        <td>
+          <input
+            formControlName="descricao"
+            name="descricao"
+            type="text"
+            placeholder="descricao"
+            class="form-control input-md"
+            [ngClass]="cssvalidator(f.descricao)"
+          />
+          <div *ngIf="f.descricao.errors?.required" class="invalid-feedback">
+            Descrição é Obrigatória
+          </div>
+          <div *ngIf="f.descricao.errors?.maxlength" class="invalid-feedback">
+            Descrição deve ter no máximo 5 caracteres
+          </div>
+        </td>
+        <td>
+          <input
+            formControlName="preco"
+            name="preco"
+            type="number"
+            placeholder="preco"
+            class="form-control input-md"
+            [ngClass]="cssvalidator(f.preco)"
+          />
+          <div *ngIf="f.preco.errors?.required" class="invalid-feedback">
+            Preço é Obrigatório
+          </div>
+        </td>
+        <td>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="checkbox"
+            checked
+            disabled
+          />
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-sm btn-success me-2"
+            (click)="salvarAlteracao()"
+            [disabled]="!form.valid"
+          >
+            <i class="fa fa-cloud-upload my-1"></i>
+            Salvar
+          </button>
+          <button
+          type="button"
+          class="btn btn-sm btn-danger me-2"
+          (click)="cancelarAlteracao()"
+        >
+          <i class="fa fa-ban my-1"></i>
+          Cancelar
+        </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="!tamanhos.length && !modoinsercao">
+      <tr>
+        <td colspan="8" class="text-center">
+          <h4>Tamanhos para {{ produto?.nome }} não cadastrados</h4>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <ng-template #template>
+    <div class="modal-body text-center">
+      <p>Tem certeza que quer deletar esse produto?</p>
+      <button type="button" class="btn btn-default" (click)="confirm()">
+        Sim
+      </button>
+      <button type="button" class="btn btn-primary" (click)="decline()">
+        Não
+      </button>
+    </div>
+  </ng-template>
+</div>

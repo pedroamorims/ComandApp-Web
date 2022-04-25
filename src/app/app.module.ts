@@ -25,6 +25,8 @@ import { CategoriaDetalheComponent } from './componentes/categorias/categoria-de
 import { CategoriaListaComponent } from './componentes/categorias/categoria-lista/categoria-lista.component';
 import { ProdutoDetalheComponent } from './componentes/produtos/produto-detalhe/produto-detalhe.component';
 import { ProdutoListaComponent } from './componentes/produtos/produto-lista/produto-lista.component';
+import { TamanhoListaComponent } from './componentes/tamanhos/tamanho-lista/tamanho-lista.component';
+import { TamanhosComponent } from './componentes/tamanhos/tamanhos.component';
 
 
 @NgModule({
@@ -32,12 +34,14 @@ import { ProdutoListaComponent } from './componentes/produtos/produto-lista/prod
     AppComponent,
     CategoriasComponent,
     ProdutosComponent,
+    TamanhosComponent,
     TitulosComponent,
       NavComponent,
       CategoriaDetalheComponent,
       CategoriaListaComponent,
       ProdutoDetalheComponent,
-      ProdutoListaComponent
+      ProdutoListaComponent,
+      TamanhoListaComponent
    ],
   imports: [
     BrowserModule,

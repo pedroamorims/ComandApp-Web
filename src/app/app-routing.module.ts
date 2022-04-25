@@ -6,6 +6,8 @@ import { CategoriasComponent } from './componentes/categorias/categorias.compone
 import { ProdutoDetalheComponent } from './componentes/produtos/produto-detalhe/produto-detalhe.component';
 import { ProdutoListaComponent } from './componentes/produtos/produto-lista/produto-lista.component';
 import { ProdutosComponent } from './componentes/produtos/produtos.component';
+import { TamanhoListaComponent } from './componentes/tamanhos/tamanho-lista/tamanho-lista.component';
+import { TamanhosComponent } from './componentes/tamanhos/tamanhos.component';
 
 const routes: Routes = [
   { path: 'categorias', redirectTo: 'categorias/lista' },
@@ -28,6 +30,16 @@ const routes: Routes = [
       { path: 'lista', component: ProdutoListaComponent },
       { path: 'lista?idCategoria=:id', component: ProdutoListaComponent },
       { path: 'detalhe', component: ProdutoDetalheComponent },
+    ],
+  },
+
+  { path: 'tamanhos', redirectTo: 'tamanhos/lista' },
+  {
+    path: 'tamanhos',
+    component: TamanhosComponent,
+    children: [
+      { path: 'lista', component: TamanhoListaComponent },
+      { path: 'lista?idProduto=:id', component: TamanhoListaComponent },
     ],
   },
   { path: '', redirectTo: 'categorias/lista', pathMatch: 'full' },

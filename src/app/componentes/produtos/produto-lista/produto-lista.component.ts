@@ -41,7 +41,7 @@ export class ProdutoListaComponent implements OnInit {
     );
   }
 
-  constructor(private produtoService: ProdutoService, private modalService: BsModalService, private toastr: ToastrService, private spinner: NgxSpinnerService, private routerlink: Router,  private router: ActivatedRoute, private categoriaService: CategoriaService,) {}
+  constructor(private produtoService: ProdutoService, private modalService: BsModalService, private toastr: ToastrService, private spinner: NgxSpinnerService, private routerlink: Router,  private router: ActivatedRoute, private categoriaService: CategoriaService) {}
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
@@ -109,6 +109,12 @@ export class ProdutoListaComponent implements OnInit {
 
   detalheproduto(id : number){
     this.routerlink.navigate([`produtos/detalhe/${id}`]);
+  }
+
+
+  buscarTamanhosporProduto(id : number){
+    this.routerlink.navigate([`tamanhos/lista/`], {queryParams: {idProduto: id}});
+
   }
 
 

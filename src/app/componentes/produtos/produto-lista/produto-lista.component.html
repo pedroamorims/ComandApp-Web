@@ -27,8 +27,7 @@
       <th>Nome</th>
       <th>Descricao</th>
       <th>Ativo</th>
-      <th>Categoria</th>
-      <th></th>
+      <th>Ações</th>
     </tr>
   </thead>
   <tbody *ngIf="produtos && produtos.length">
@@ -41,14 +40,12 @@
       <td *ngIf="!produto.ativo">
         <input class="form-check-input" type="checkbox" value = "" id = "checkbox" disabled>
       </td>
-      <td>{{ produto.categoria.descricao }}</td>
-
      <!-- {{produto.ativo ? 'flexCheckDisabled' : 'flexCheckChecked'}} -->
       <td>
         <button
         type="button"
         class="btn btn-secondary btn-sm  me-2"
-        (click)="openModal(template)"
+        (click)="buscarTamanhosporProduto(produto.id)"
       >
         <i class="fa fa-eye"></i>
         Tamanhos e Preços
